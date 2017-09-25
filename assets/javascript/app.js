@@ -22,7 +22,7 @@ var intervalId;
 
 // Create an object to hold questions for the game.
 var questions = {
-	q1: ["How many new computer viruses are appear each month?", "5,000", "100,000", "1,000", "2,500", "5,000"],
+	q1: ["How many new computer viruses appear each month?", "5,000", "100,000", "1,000", "2,500", "5,000"],
 	q2: ["What is the longest word you can type using only one row of letters on the keyboard?", "Typewriter", "Qwerty", "Cascading", "Javascript", "Typewriter"]
 };
 
