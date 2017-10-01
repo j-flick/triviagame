@@ -2,7 +2,6 @@
 // ====================================================================
 window.onload = function () {
 	$("#startButton").click(startGame);
-	// $("#startButton").click(getQuestion);
 };
 
 // Variables
@@ -80,12 +79,10 @@ function nextQuestion() {
 }
 
 function getQuestion() {
-	console.log("Current Question begin getQ:" + currentQuestion);
-	// Function displaying the time in HTML.
+	// Set initial time of 30 in HTML so there is no delay in the decrement function between questions.
 	setTime();
 	// Run the decrement function every 1 second for a running clock.
 	startTimer();
-	// timer = setInterval(decrement, 1000);
 
 	// Display the div holding the time.
 	$("#timeDiv").css("display", "block");
@@ -108,7 +105,6 @@ function getQuestion() {
 			$("#message").html("Correct!<br>Get ready for the next question!");
 			// Move to next question.
 			currentQuestion++;
-			console.log("Current Question after correct answer:" + currentQuestion);
 		}
 		// If they don't match, add one to the wrong answers total and show a message letting the user know they were wrong.
 		else {
@@ -119,7 +115,6 @@ function getQuestion() {
 			$("#message").html("Wrong. The correct answer was " + questions[currentQuestion].answer + ".<br>Get ready for the next question!");
 			// Move to next question.
 			currentQuestion++;
-			console.log("Current Question after wrong answer:" + currentQuestion);
 		}
 
 		if (currentQuestion === questions.length) {
@@ -129,32 +124,17 @@ function getQuestion() {
 			nextQuestion();
 		}
 
-		// If there are more questions, display the next question.
-		// if (currentQuestion < questions.length - 1) {
-		// 	nextQuestion();
-		// }
-		// // If no questions remain, show the results.
-		// else if (currentQuestion === questions.length - 1) {
-		// 	displayResults();
-		// }
-
 	});
 }
 
 function displayResults() {
-	console.log("Current Question at display results:" + currentQuestion);
-	// Stop the timer.
-	clearInterval(timer);
 	// Show results div with updated user stats.
 	$("#results").show();
 	$("#message").html("Thanks for playing, here are your results!");
 	$("#correctAnswers").text(correctAnswers);
 	$("#wrongAnswers").text(wrongAnswers);
 	$("#unanswered").text(unanswered);
-	// Click listener to see if the user wants to play again.
-	// $("#playAgain").on("click", function() {
-	// 	resetGame();
-	// });
+	// Reset the game.
 	$("#playAgain").click(resetGame);
 }
 
@@ -167,9 +147,7 @@ function resetGame() {
 	correctAnswers = 0;
 	wrongAnswers = 0;
 	unanswered = 0;	
-	console.log("Current Question before reset:" + currentQuestion);
 	currentQuestion = 0;
-	console.log("Current Question after reset:" + currentQuestion);
 	// Get first question again.
 	getQuestion();
 }
