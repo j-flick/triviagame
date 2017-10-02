@@ -68,6 +68,8 @@ function showMessage() {
 }
 
 function nextQuestion() {
+	// Remove on click event handler.
+	$(".choice").off();
 	// // Move to next question.
 	// currentQuestion++;
 	// // Stop the timer.
@@ -143,6 +145,8 @@ function resetGame() {
 	// Hide the previous game's results.
 	$("#results").hide();
 	// Reset values.
+	// Remove on click event handler.
+	$(".choice").off();
 	time = 30;
 	correctAnswers = 0;
 	wrongAnswers = 0;
