@@ -93,7 +93,7 @@ function getQuestion() {
 	displayChoices();
 
 	// Get answer on click.
-	$(".choice").on("click", function() {
+	$(".choice").one("click", function() {
 		answer = $(this).text();
 
 		// Compare the selected answer to the correct answer.
@@ -102,25 +102,44 @@ function getQuestion() {
 			// Stop the timer.
 			clearInterval(timer);
 			correctAnswers++;
+			
 			// Function shows message while hiding the other divs.
-			showMessage();
-			$("#message").html("Correct!<br>Get ready for the next question!");
-			// Move to next question.
-			currentQuestion++;
+			if (currentQuestion === questions.length - 1) {
+				showMessage();
+				$("#message").html("Correct!<br>Preparing your results...");
+				// Move to next question.
+				currentQuestion++;
+			}
+			else{
+				showMessage();
+				$("#message").html("Correct!<br>Get ready for the next question!");
+				// Move to next question.
+				currentQuestion++;
+			}
 		}
 		// If they don't match, add one to the wrong answers total and show a message letting the user know they were wrong.
 		else {
 			// Stop the timer.
 			clearInterval(timer);
 			wrongAnswers++;
-			showMessage();
-			$("#message").html("Wrong. The correct answer was " + questions[currentQuestion].answer + ".<br>Get ready for the next question!");
-			// Move to next question.
-			currentQuestion++;
+
+			// Function shows message while hiding the other divs.
+			if (currentQuestion === questions.length - 1) {
+				showMessage();
+				$("#message").html("Wrong. The correct answer was " + questions[currentQuestion].answer + ".<br>Preparing your results...");
+				// Move to next question.
+				currentQuestion++;
+			}
+			else{
+				showMessage();
+				$("#message").html("Wrong. The correct answer was " + questions[currentQuestion].answer + ".<br>Get ready for the next question!");
+				// Move to next question.
+				currentQuestion++;
+			}			
 		}
 
 		if (currentQuestion === questions.length) {
-			displayResults();
+			setTimeout(displayResults, 4000);
 		}
 		else {
 			nextQuestion();
@@ -176,13 +195,16 @@ function timesUp() {
 	// Show a message displaying the correct answer.
 	showMessage();
 	$("#message").html("Times Up!<br>The correct answer was " + questions[currentQuestion].answer + ".");
+	// Move to next question.
+	currentQuestion++;
 	// If there are no more questions, show the results after 4 seconds.
-	if(currentQuestion === questions.length - 1) {
+	if(currentQuestion === questions.length) {
 		setTimeout(displayResults, 4000);
 	}
 	// If there are more questions, go to the next question after 4 seconds.
 	else {
-		setTimeout(nextQuestion, 4000);
+		// setTimeout(nextQuestion, 4000);
+		nextQuestion();
 	}
 }
 
